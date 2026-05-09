@@ -1,41 +1,501 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Name | Portfolio</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sitra Fethi | Full Stack Developer</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    body { font-family: Arial, sans-serif; max-width: 800px; margin: auto; padding: 2rem; line-height: 1.6; }
-    header, footer { text-align: center; }
-    .project { border: 1px solid #ddd; padding: 1rem; margin-bottom: 1.5rem; border-radius: 8px; }
-    h1, h2 { color: #333; }
-    a { color: #007bff; text-decoration: none; }
-    a:hover { text-decoration: underline; }
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      font-family:'Poppins', sans-serif;
+      background:#0f172a;
+      color:#f8fafc;
+      line-height:1.7;
+    }
+
+    a{
+      text-decoration:none;
+      color:inherit;
+    }
+
+    .container{
+      width:90%;
+      max-width:1200px;
+      margin:auto;
+    }
+
+    /* NAVBAR */
+    nav{
+      position:fixed;
+      width:100%;
+      top:0;
+      z-index:1000;
+      background:rgba(15,23,42,0.95);
+      backdrop-filter:blur(10px);
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-content{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:1rem 0;
+    }
+
+    .logo{
+      font-size:1.3rem;
+      font-weight:700;
+      color:#38bdf8;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:2rem;
+    }
+
+    .nav-links a{
+      transition:0.3s;
+      font-weight:500;
+    }
+
+    .nav-links a:hover{
+      color:#38bdf8;
+    }
+
+    /* HERO */
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      text-align:center;
+      background:
+      linear-gradient(rgba(15,23,42,0.9), rgba(15,23,42,0.95)),
+      url('https://images.unsplash.com/photo-1515879218367-8466d910aaa4?q=80&w=1600&auto=format&fit=crop');
+      background-size:cover;
+      background-position:center;
+      padding:2rem;
+    }
+
+    .hero-content h1{
+      font-size:4rem;
+      margin-bottom:1rem;
+      line-height:1.2;
+    }
+
+    .hero-content span{
+      color:#38bdf8;
+    }
+
+    .hero-content p{
+      max-width:700px;
+      margin:auto;
+      color:#cbd5e1;
+      font-size:1.1rem;
+    }
+
+    .hero-buttons{
+      margin-top:2rem;
+      display:flex;
+      gap:1rem;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:0.9rem 1.8rem;
+      border-radius:10px;
+      font-weight:600;
+      transition:0.3s;
+      display:inline-block;
+    }
+
+    .btn-primary{
+      background:#38bdf8;
+      color:#0f172a;
+    }
+
+    .btn-primary:hover{
+      background:#0ea5e9;
+      transform:translateY(-3px);
+    }
+
+    .btn-outline{
+      border:2px solid #38bdf8;
+      color:#38bdf8;
+    }
+
+    .btn-outline:hover{
+      background:#38bdf8;
+      color:#0f172a;
+    }
+
+    /* SECTION */
+    section{
+      padding:6rem 0;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:4rem;
+    }
+
+    .section-title h2{
+      font-size:2.5rem;
+      color:#38bdf8;
+    }
+
+    .section-title p{
+      color:#94a3b8;
+    }
+
+    /* ABOUT */
+    .about{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:3rem;
+      align-items:center;
+    }
+
+    .about-card{
+      background:#1e293b;
+      padding:2rem;
+      border-radius:20px;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .skills{
+      display:flex;
+      flex-wrap:wrap;
+      gap:1rem;
+      margin-top:1.5rem;
+    }
+
+    .skill{
+      background:#0f172a;
+      padding:0.6rem 1rem;
+      border-radius:50px;
+      border:1px solid rgba(255,255,255,0.1);
+      color:#38bdf8;
+      font-size:0.9rem;
+    }
+
+    /* PROJECTS */
+    .projects-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
+      gap:2rem;
+    }
+
+    .project-card{
+      background:#1e293b;
+      border-radius:20px;
+      overflow:hidden;
+      transition:0.3s;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .project-card:hover{
+      transform:translateY(-10px);
+    }
+
+    .project-content{
+      padding:2rem;
+    }
+
+    .project-content h3{
+      margin-bottom:1rem;
+      color:#38bdf8;
+    }
+
+    .project-content p{
+      color:#cbd5e1;
+      margin-bottom:1.5rem;
+    }
+
+    .tech-stack{
+      display:flex;
+      flex-wrap:wrap;
+      gap:0.7rem;
+      margin-bottom:1.5rem;
+    }
+
+    .tech{
+      background:#0f172a;
+      padding:0.4rem 0.8rem;
+      border-radius:50px;
+      font-size:0.8rem;
+      color:#94a3b8;
+    }
+
+    .project-links{
+      display:flex;
+      gap:1rem;
+    }
+
+    /* CONTACT */
+    .contact-box{
+      background:#1e293b;
+      padding:3rem;
+      border-radius:20px;
+      text-align:center;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+
+    .contact-box p{
+      margin:1rem 0;
+      color:#cbd5e1;
+    }
+
+    footer{
+      text-align:center;
+      padding:2rem;
+      border-top:1px solid rgba(255,255,255,0.08);
+      color:#94a3b8;
+    }
+
+    @media(max-width:768px){
+
+      .hero-content h1{
+        font-size:2.7rem;
+      }
+
+      .about{
+        grid-template-columns:1fr;
+      }
+
+      .nav-links{
+        gap:1rem;
+        font-size:0.9rem;
+      }
+    }
+
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>Your Name</h1>
-    <p>Web Developer | Building useful, fast, and clean web apps</p>
-  </header>
 
-  <section>
-    <h2>Projects</h2>
-    <div class="project">
-      <h3>Project 1</h3>
-      <p>Short description about what it does and technologies used.</p>
-      <a href="[github.com](https://github.com/yourusername/project1)">View Project</a>
+  <!-- NAVBAR -->
+  <nav>
+    <div class="container nav-content">
+      <div class="logo">Sitra Fethi</div>
+
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
     </div>
+  </nav>
 
-    <div class="project">
-      <h3>Project 2</h3>
-      <p>Another quick overview of your second project.</p>
-      <a href="[github.com](https://github.com/yourusername/project2)">View Project</a>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Hello, I'm <span>Sitra Fethi</span></h1>
+
+      <p>
+        Full Stack Developer focused on building modern web applications,
+        management systems, and scalable backend solutions.
+        Passionate about clean UI design, secure systems,
+        and solving real-world problems with technology.
+      </p>
+
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact" class="btn btn-outline">Hire Me</a>
+      </div>
     </div>
   </section>
 
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>About Me</h2>
+        <p>Developer • Problem Solver • System Builder</p>
+      </div>
+
+      <div class="about">
+
+        <div class="about-card">
+          <h3>Who Am I?</h3>
+
+          <p>
+            I am a software developer with strong interest in
+            full stack development, backend architecture,
+            database systems, and management platforms.
+          </p>
+
+          <br>
+
+          <p>
+            I enjoy building secure, scalable, and user-friendly systems
+            using modern technologies and clean development practices.
+          </p>
+        </div>
+
+        <div class="about-card">
+          <h3>Skills</h3>
+
+          <div class="skills">
+            <div class="skill">HTML</div>
+            <div class="skill">CSS</div>
+            <div class="skill">JavaScript</div>
+            <div class="skill">PHP</div>
+            <div class="skill">MySQL</div>
+            <div class="skill">Node.js</div>
+            <div class="skill">Express.js</div>
+            <div class="skill">React</div>
+            <div class="skill">REST API</div>
+            <div class="skill">Git & GitHub</div>
+            <div class="skill">System Design</div>
+            <div class="skill">Database Design</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Projects</h2>
+        <p>Some systems and applications I have worked on</p>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- PROJECT 1 -->
+        <div class="project-card">
+          <div class="project-content">
+
+            <h3>Prison Management System</h3>
+
+            <p>
+              A complete prison management platform designed to manage prisoners,
+              admissions, parole, visits, case records, staff roles,
+              and prison operations efficiently.
+            </p>
+
+            <div class="tech-stack">
+              <div class="tech">PHP</div>
+              <div class="tech">MySQL</div>
+              <div class="tech">HTML/CSS</div>
+              <div class="tech">JavaScript</div>
+            </div>
+
+            <div class="project-links">
+              <a href="#" class="btn btn-primary">Live Demo</a>
+              <a href="#" class="btn btn-outline">GitHub</a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PROJECT 2 -->
+        <div class="project-card">
+          <div class="project-content">
+
+            <h3>Role Based Access Control System</h3>
+
+            <p>
+              A secure RBAC implementation with authentication,
+              permission management, user roles,
+              and activity logging for enterprise applications.
+            </p>
+
+            <div class="tech-stack">
+              <div class="tech">Node.js</div>
+              <div class="tech">Express</div>
+              <div class="tech">JWT</div>
+              <div class="tech">MongoDB</div>
+            </div>
+
+            <div class="project-links">
+              <a href="#" class="btn btn-primary">Live Demo</a>
+              <a href="#" class="btn btn-outline">GitHub</a>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- PROJECT 3 -->
+        <div class="project-card">
+          <div class="project-content">
+
+            <h3>Dashboard & Analytics UI</h3>
+
+            <p>
+              Responsive admin dashboard with charts,
+              statistics panels, reports,
+              and modern UI/UX design principles.
+            </p>
+
+            <div class="tech-stack">
+              <div class="tech">React</div>
+              <div class="tech">Chart.js</div>
+              <div class="tech">Tailwind</div>
+            </div>
+
+            <div class="project-links">
+              <a href="#" class="btn btn-primary">Live Demo</a>
+              <a href="#" class="btn btn-outline">GitHub</a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+
+      <div class="section-title">
+        <h2>Contact Me</h2>
+        <p>Let's build something great together</p>
+      </div>
+
+      <div class="contact-box">
+
+        <h3>Get In Touch</h3>
+
+        <p>Email: your-email@example.com</p>
+
+        <p>GitHub: github.com/yourusername</p>
+
+        <p>LinkedIn: linkedin.com/in/yourprofile</p>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
   <footer>
-    <p>Contact: <a href="mailto:youremail@example.com">youremail@example.com</a></p>
+    <p>© 2026 Sitra Fethi. All rights reserved.</p>
   </footer>
+
 </body>
 </html>
